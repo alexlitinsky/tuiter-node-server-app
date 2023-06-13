@@ -1,35 +1,67 @@
 import * as usersDao from "./users-dao.js";
 
 const AuthController = (app) => {
+
+  // ORIGINAL REGISTER
+  // const register = async (req, res) => {
+  //   const username = req.body.username;
+  //   console.log("registration begins")
+  //   console.log(new Date())
+  //   console.log("username: ", username);
+  //   const user = usersDao.findUserByUsername(username);
+  //   if (user) {
+  //     res.sendStatus(409);
+  //     return;
+  //   }
+  //   const newUser = usersDao.createUser(req.body);
+  //   console.log("all the users after registratoin: ", usersDao.findAllUsers());
+  //   req.session["currentUser"] = newUser;
+  //   console.log("registration current user", req.session["currentUser"]);
+  //   res.json(newUser);
+  // };
+
   const register = async (req, res) => {
-    const username = req.body.username;
-    console.log("registration begins")
-    console.log(new Date())
-    console.log("username: ", username);
-    const user = usersDao.findUserByUsername(username);
+    const user = await usersDao.findUserByUsername(req.body.username);
     if (user) {
-      res.sendStatus(409);
+      res.sendStatus(403);
       return;
     }
-    const newUser = usersDao.createUser(req.body);
-    console.log("all the users after registratoin: ", usersDao.findAllUsers());
+    const newUser = await usersDao.createUser(req.body);
     req.session["currentUser"] = newUser;
-    console.log("registration current user", req.session["currentUser"]);
     res.json(newUser);
   };
+
+  // ORIGINAL LOGIN
+  // const login = async (req, res) => {
+  //   const username = req.body.username;
+  //   const password = req.body.password;
+  //   const user = await usersDao.findUserByCredentials(username, password);
+  //   if (user) {
+  //     console.log("login worked")
+  //     req.session["currentUser"] = user;
+  //     res.json(user);
+  //   } else {
+  //     console.log("login error");
+  //     res.sendStatus(404);
+  //   }
+  // };
+
   const login = async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const user = await usersDao.findUserByCredentials(username, password);
-    if (user) {
-      console.log("login worked")
-      req.session["currentUser"] = user;
-      res.json(user);
+    if (username && password) {
+      const user = await usersDao.findUserByCredentials(username, password);
+      if (user) {
+        req.session["currentUser"] = user;
+        res.json(user);
+      } else {
+        res.sendStatus(403);
+      }
     } else {
-      console.log("login error");
-      res.sendStatus(404);
+      res.sendStatus(403);
     }
   };
+
   const profile = async (req, res) => {
     console.log("all the users in profile method", usersDao.findAllUsers());
     console.log(new Date());

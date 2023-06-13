@@ -5,6 +5,12 @@ import HelloController from "./controllers/hello-controller.js"
 import UserController from './users/users-controller.js';
 import TuitsController from './controllers/tuits/tuits-controller.js';
 import AuthController from './users/auth-controller.js';
+import mongoose from 'mongoose';
+const DB_SERVER = "mongodb+srv://Cluster14538:R2lLZHNRVk9f@cluster14538.rapizri.mongodb.net/tuiter?retryWrites=true&w=majority"
+// const DB_SERVER = "mongodb+srv://Cluster14538:R2lLZHNRVk9f@cluster14538.rapizri.mongodb.net/?appName=mongosh+1.9.1/tuiter"
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || DB_SERVER
+mongoose.connect(CONNECTION_STRING);
+
 const app = express()
 app.use(
   session({
