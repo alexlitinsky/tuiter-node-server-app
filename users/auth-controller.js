@@ -30,11 +30,22 @@ const AuthController = (app) => {
   };
 
   const profile = async (req, res) => {
-    console.log("all the users in profile method", usersDao.findAllUsers());
-    console.log(new Date());
-    console.log("req session id in profile: ", req.session._id);
-    const currentUser = req.session["currentUser"];
-    console.log("profile current user", currentUser);
+    // working on local server
+
+    // console.log("all the users in profile method", usersDao.findAllUsers());
+    // console.log(new Date());
+    // console.log("req session id in profile: ", req.session._id);
+    // const currentUser = req.session["currentUser"];
+    // console.log("profile current user", currentUser);
+    // if (!currentUser) {
+    //   res.sendStatus(404);
+    //   return;
+    // }
+    // res.json(currentUser);
+
+    const session = req.session["currentUser"];
+    const userId = session._id;
+    const currentUser = await usersDao.findUserById(userId);
     if (!currentUser) {
       res.sendStatus(404);
       return;
