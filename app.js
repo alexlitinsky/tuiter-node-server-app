@@ -17,6 +17,7 @@ app.use(
     secret: "any string",
     resave: false,
     saveUninitialized: true,
+    cookie: { sameSite: 'None', secure: true }
   })
 );
 app.use(express.json());
