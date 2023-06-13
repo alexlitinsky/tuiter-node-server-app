@@ -23,8 +23,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: '*',
-    // origin: ["http://localhost:3000", "https://wd-a5-thriving-entremet-f12849.netlify.app"],
+    origin: ["http://localhost:3000", "https://wd-a5-thriving-entremet-f12849.netlify.app", "https://tuiter-node-server-app-a6.onrender.com"],
   })
 );
 TuitsController(app);
