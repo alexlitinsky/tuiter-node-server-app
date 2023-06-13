@@ -49,6 +49,7 @@ const deleteUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+  console.log("Updated user circular to JSON", req)
   const id = req.params.id;
   const status = await usersDao.updateUser(id, req.body);
   const user = await usersDao.findUserById(id);
