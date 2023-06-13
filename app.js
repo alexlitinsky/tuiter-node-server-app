@@ -27,11 +27,6 @@ app.use(
   })
 );
 
-// Set the Access-Control-Allow-Origin header
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with your desired origin or whitelist specific origins instead
-  next();
-});
 TuitsController(app);
 HelloController(app)
 UserController(app)
