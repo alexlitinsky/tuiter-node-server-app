@@ -28,7 +28,7 @@ const AuthController = (app) => {
       res.sendStatus(403);
     }
   };
-
+  let currentUser;
   const profile = async (req, res) => {
     // working on local server (ig not anymore??)
     // other method is with the id
@@ -36,9 +36,9 @@ const AuthController = (app) => {
     console.log("all the users in profile method", usersDao.findAllUsers());
     console.log(new Date());
     console.log("req session id in profile: ", req.session["currentUser"]);
-    const currentUser = req.session["currentUser"];
+    // const currentUser = req.session["currentUser"];
+    currentUser = req.session["currentUser"];
     console.log("profile current user", currentUser);
-    console.log("req info", req);
     if (!currentUser) {
       res.sendStatus(404);
       return;
@@ -51,7 +51,7 @@ const AuthController = (app) => {
     res.sendStatus(200);
   };
   const update = async (req, res) => {
-    const currentUser = req.session["currentUser"];
+    currentUser = req.session["currentUser"];
     const userId = currentUser._id;
     console.log("user id hopefully: ", usersDao.findUserById(userId));
     const updatedUser = await usersDao.updateUser(userId, req.body);

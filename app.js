@@ -23,7 +23,7 @@ app.use(
     secret: "any string",
     resave: false,
     saveUninitialized: true,
-    cookie: { sameSite: 'None', secure: true }
+    // cookie: { sameSite: 'None', secure: false, httpOnly: true }
   })
 );
 app.use(express.json());
