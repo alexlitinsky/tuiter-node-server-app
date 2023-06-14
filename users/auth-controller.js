@@ -43,10 +43,11 @@ const AuthController = (app) => {
     // }
     // res.json(currentUser);
 
-    // loads up profile correctly but doens't create new users or updates them
-    const session = req.session["currentUser"];
-    const userId = session._id;
-    const currentUser = await usersDao.findUserById(userId);
+    // loads up profile correctly on normal server but doens't create new users or updates them
+    console.log("req body", usersDao.findUserById(req.session["currentUser"]));
+    // const loadUser = req.session["currentUser"];
+    // const userId = loadUser._id;
+    const currentUser = await usersDao.findUserById(req.session["currentUser"]._id);
     if (!currentUser) {
       res.sendStatus(404);
       return;
