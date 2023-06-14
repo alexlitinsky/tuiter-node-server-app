@@ -60,10 +60,10 @@ const AuthController = (app) => {
   };
   const update = async (req, res) => {
     const currentUser = req.session["currentUser"];
-    // const userId = currentUser._id;
-    // console.log("user id hopefully: ", usersDao.findUserById(userId));
-    // const updatedUser = await usersDao.updateUser(userId, req.body);
-    const updatedUser = await usersDao.updateUser(currentUser, req.body);
+    const userId = currentUser._id;
+    console.log("user id hopefully: ", usersDao.findUserById(userId));
+    const updatedUser = await usersDao.updateUser(userId, req.body);
+    // const updatedUser = await usersDao.updateUser(currentUser, req.body);
     if (!updatedUser) {
       console.log("couldn't update user")
       res.sendStatus(404);
