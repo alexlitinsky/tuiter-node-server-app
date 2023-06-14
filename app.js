@@ -15,7 +15,7 @@ const app = express()
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000", "https://wd-a5-thriving-entremet-f12849.netlify.app", "https://tuiter-node-server-app-a6.onrender.com"],
+    origin: ["http://localhost:3000", "https://wd-a5-thriving-entremet-f12849.netlify.app", "https://tuiter-node-server-app-a6.onrender.com", "https://wd-a6-lucky-queijadas-293ea1.netlify.app"],
   })
 );
 app.use(
