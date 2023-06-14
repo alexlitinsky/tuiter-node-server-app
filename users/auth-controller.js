@@ -31,28 +31,20 @@ const AuthController = (app) => {
 
   const profile = async (req, res) => {
     // working on local server (ig not anymore??)
+    // other method is with the id
 
-    // console.log("all the users in profile method", usersDao.findAllUsers());
-    // console.log(new Date());
-    // console.log("req session id in profile: ", req.session._id);
-    // const currentUser = req.session["currentUser"];
-    // console.log("profile current user", currentUser);
-    // if (!currentUser) {
-    //   res.sendStatus(404);
-    //   return;
-    // }
-    // res.json(currentUser);
-
-    // loads up profile correctly on normal server but doens't create new users or updates them
-    console.log("req body", usersDao.findUserById(req.session["currentUser"]));
-    const loadUser = req.session["currentUser"];
-    const userId = loadUser._id;
-    const currentUser = await usersDao.findUserById(req.session["currentUser"]._id);
+    console.log("all the users in profile method", usersDao.findAllUsers());
+    console.log(new Date());
+    console.log("req session id in profile: ", req.session["currentUser"]);
+    const currentUser = req.session["currentUser"];
+    console.log("profile current user", currentUser);
+    console.log("req info", req);
     if (!currentUser) {
       res.sendStatus(404);
       return;
     }
     res.json(currentUser);
+
   };
   const logout = async (req, res) => {
     req.session.destroy();
@@ -64,6 +56,7 @@ const AuthController = (app) => {
     console.log("user id hopefully: ", usersDao.findUserById(userId));
     const updatedUser = await usersDao.updateUser(userId, req.body);
     // const updatedUser = await usersDao.updateUser(currentUser, req.body);
+    // other method without id but creates a network error if I just use session
     if (!updatedUser) {
       console.log("couldn't update user")
       res.sendStatus(404);
