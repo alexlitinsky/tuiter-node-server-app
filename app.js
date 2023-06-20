@@ -16,7 +16,7 @@ app.set("trust proxy", 1);
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000", "https://wd-a5-thriving-entremet-f12849.netlify.app", "https://tuiter-node-server-app-a6.onrender.com", "https://wd-a6-lucky-queijadas-293ea1.netlify.app"],
+    origin: ["http://localhost:3000", "https://wd-a5-thriving-entremet-f12849.netlify.app", "https://tuiter-node-server-app-a6.onrender.com", "https://wd-a6-lucky-queijadas-293ea1.netlify.app", "https://wd-a6-testing-radiant-wisp-cd20bb.netlify.app"],
   })
 );
 app.use(
