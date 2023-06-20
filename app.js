@@ -12,6 +12,7 @@ const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || DB_SERVER
 mongoose.connect(CONNECTION_STRING);
 
 const app = express()
+app.set("trust proxy", 1);
 app.use(
   cors({
     credentials: true,
@@ -22,8 +23,9 @@ app.use(
   session({
     secret: "any string",
     resave: false,
+    proxy: true,
     saveUninitialized: true,
-    // cookie: { sameSite: 'None', secure: false, httpOnly: true }
+    cookie: { sameSite: 'none', secure: true, }
   })
 );
 app.use(express.json());
